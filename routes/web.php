@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,16 +17,9 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+    Route::get('/', fn() => redirect('dashboard'))->name('home');
     Route::get('/dashboard', fn() => Inertia::render('Dashboard'))->name('dashboard');
     Route::apiResource('contacts', ContactController::class)->except(['show']);
+    Route::apiResource('users', UserController::class)->except(['show']);
 });
