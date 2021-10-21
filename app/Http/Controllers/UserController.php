@@ -7,11 +7,27 @@ use App\Actions\Users\CreateNewUser;
 use App\Actions\Users\UpdateUser;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use Exception;
 use Inertia\Inertia;
 use Laravel\Jetstream\Contracts\DeletesTeams;
 
 class UserController extends Controller
 {
+    /**
+     * User instances
+    */
+    protected $users;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(User $users)
+    {
+        $this->users = $users;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +35,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Users/Index', ['users' => User::orderBy('id', 'desc')->paginate()]);
+        return Inertia::render('Users/Index', [
+            'users' => $this->users::orderBy('id', 'desc')->paginate()
+        ]);
     }
 
     /**
@@ -31,8 +49,23 @@ class UserController extends Controller
      */
     public function store(UserRequest $request, CreateNewUser $action)
     {
-        $action->create($request);
-        return back();
+        try {
+            $action->create($request);
+            $flashStatus = [
+                'flash.banner' => trans('messages.saved'),
+                'flash.bannerStyle' => 'success'
+            ];
+        } catch (Exception $ex) {
+            if(env('AMBIENTE') === 'DEV')
+                throw $ex;
+            else
+                $flashStatus = [
+                    'flash.banner' => trans('messages.saved_failed'),
+                    'flash.bannerStyle' => 'danger'
+                ];
+        }
+
+        return back()->with($flashStatus);
     }
 
     /**
@@ -45,8 +78,23 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user, UpdateUser $action)
     {
-        $action->update($user, $request);
-        return back();
+        try {
+            $action->update($user, $request);
+            $flashStatus = [
+                'flash.banner' => trans('messages.edited'),
+                'flash.bannerStyle' => 'success'
+            ];
+        } catch (Exception $ex) {
+            if(env('AMBIENTE') === 'DEV')
+                throw $ex;
+            else
+                $flashStatus = [
+                    'flash.banner' => trans('messages.edited_failed'),
+                    'flash.bannerStyle' => 'danger'
+                ];
+        }
+
+        return back()->with($flashStatus);
     }
 
     /**
@@ -58,8 +106,27 @@ class UserController extends Controller
      */
     public function destroy(User $user, DeletesTeams $deletesTeams)
     {
-        $deleteUser = new DeleteUser($deletesTeams);
-        $deleteUser->delete($user);
+        try {
+            $deleteUser = new DeleteUser($deletesTeams);
+            $deleteUser->delete($user);
+
+            $flashStatus = [
+                'flash.banner' => trans('messages.deleted'),
+                'flash.bannerStyle' => 'success'
+            ];
+        } catch (Exception $ex) {
+            if(env('AMBIENTE') === 'DEV')
+                throw $ex;
+            else
+                $flashStatus = [
+                    'flash.banner' => trans('messages.delete_failed'),
+                    'flash.bannerStyle' => 'danger'
+                ];
+        }
+
+        return back()->with($flashStatus);
+
+
         return back();
     }
 }

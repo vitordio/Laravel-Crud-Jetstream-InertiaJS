@@ -39,7 +39,6 @@ class UserRequest extends FormRequest
                 $validation = [
                     'name'  => ['required', 'max:50'],
                     'email' => ['required', 'email', "unique:users,email,{$this->user->id},id"],
-                    'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
                 ];
 
                 if($this->password)
