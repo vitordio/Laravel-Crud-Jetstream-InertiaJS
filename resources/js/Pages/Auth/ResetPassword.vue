@@ -2,20 +2,29 @@
     <Head title="Reset Password" />
 
     <jet-authentication-card>
+        <template #background>
+            <jet-authentication-background />
+        </template>
+
         <template #logo>
             <jet-authentication-card-logo />
         </template>
 
-        <jet-validation-errors class="mb-4" />
+        <template #pageTitle>
+            <h1 class="text-xl md:text-2xl font-bold leading-tight mt-4">Reset password</h1>
+        </template>
 
-        <form @submit.prevent="submit">
+        <!-- Validation Errors -->
+        <jet-validation-errors class="mb-4 mt-4" />
+
+        <form @submit.prevent="submit" class="mt-6">
             <div>
-                <jet-label for="email" value="Email" />
+                <jet-label for="email" class="block text-gray-700" value="E-mail" />
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus />
             </div>
 
             <div class="mt-4">
-                <jet-label for="password" value="Password" />
+                <jet-label for="password" class="block text-gray-700" value="Password" />
                 <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
             </div>
 
@@ -38,7 +47,8 @@
     import { Head } from '@inertiajs/inertia-vue3';
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
-    import JetButton from '@/Jetstream/Button.vue'
+    import JetAuthenticationBackground from '@/Jetstream/BackgroundLogin.vue'
+    import JetButton from '@/Jetstream/LoginButton.vue'
     import JetInput from '@/Jetstream/Input.vue'
     import JetLabel from '@/Jetstream/Label.vue'
     import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
@@ -48,6 +58,7 @@
             Head,
             JetAuthenticationCard,
             JetAuthenticationCardLogo,
+            JetAuthenticationBackground,
             JetButton,
             JetInput,
             JetLabel,

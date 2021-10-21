@@ -2,31 +2,40 @@
     <Head title="Register" />
 
     <jet-authentication-card>
+        <template #background>
+            <jet-authentication-background />
+        </template>
+
         <template #logo>
             <jet-authentication-card-logo />
         </template>
 
-        <jet-validation-errors class="mb-4" />
+        <template #pageTitle>
+            <h1 class="text-xl md:text-2xl font-bold leading-tight mt-4">Register</h1>
+        </template>
 
-        <form @submit.prevent="submit">
+        <!-- Validation Errors -->
+        <jet-validation-errors class="mb-4 mt-4" />
+
+        <form @submit.prevent="submit" class="mt-6">
             <div>
                 <jet-label for="name" value="Name" />
-                <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
+                <jet-input id="name" type="text" placeholder="Name" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
             </div>
 
             <div class="mt-4">
                 <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required />
+                <jet-input id="email" type="email" placeholder="Email" class="mt-1 block w-full" v-model="form.email" required />
             </div>
 
             <div class="mt-4">
                 <jet-label for="password" value="Password" />
-                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
+                <jet-input id="password" type="password" placeholder="Password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
                 <jet-label for="password_confirmation" value="Confirm Password" />
-                <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
+                <jet-input id="password_confirmation" type="password" placeholder="Confirm Password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
             </div>
 
             <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
@@ -41,14 +50,16 @@
                 </jet-label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Already registered?
-                </Link>
-
+            <div class="flex items-center justify-end">
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Register
                 </jet-button>
+            </div>
+
+            <div class="flex items-center justify-center mt-2 mb-4">
+                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
+                    Already registered?
+                </Link>
             </div>
         </form>
     </jet-authentication-card>
@@ -58,7 +69,8 @@
     import { defineComponent } from 'vue'
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
-    import JetButton from '@/Jetstream/Button.vue'
+    import JetAuthenticationBackground from '@/Jetstream/BackgroundLogin.vue'
+    import JetButton from '@/Jetstream/LoginButton.vue'
     import JetInput from '@/Jetstream/Input.vue'
     import JetCheckbox from '@/Jetstream/Checkbox.vue'
     import JetLabel from '@/Jetstream/Label.vue'
@@ -70,6 +82,7 @@
             Head,
             JetAuthenticationCard,
             JetAuthenticationCardLogo,
+            JetAuthenticationBackground,
             JetButton,
             JetInput,
             JetCheckbox,

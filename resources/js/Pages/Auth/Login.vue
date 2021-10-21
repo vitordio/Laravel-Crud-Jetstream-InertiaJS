@@ -1,45 +1,61 @@
 <template>
-    <Head title="Log in" />
+    <Head title="Login" />
 
+    <!-- Login component -->
     <jet-authentication-card>
+        <template #background>
+            <jet-authentication-background />
+        </template>
+
         <template #logo>
             <jet-authentication-card-logo />
         </template>
 
-        <jet-validation-errors class="mb-4" />
+        <template #pageTitle>
+            <h1 class="text-xl md:text-2xl font-bold leading-tight mt-4">Log in to your account</h1>
+        </template>
 
+        <!-- Validation Errors -->
+        <jet-validation-errors class="mb-4 mt-4" />
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
 
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submit" class="mt-6">
             <div>
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus />
+                <jet-label for="email" class="block text-gray-700" value="E-mail" />
+                <jet-input id="email" type="email" placeholder="Enter Email Address" class="mt-1 block w-full" v-model="form.email" required autocomplete  autofocus />
             </div>
 
             <div class="mt-4">
-                <jet-label for="password" value="Password" />
-                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
+                <jet-label for="password" class="block text-gray-700" value="Password" />
+                <jet-input id="password" type="password" placeholder="Enter Password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
             </div>
 
-            <div class="block mt-4">
+            <div class="flex justify-between mt-4">
                 <label class="flex items-center">
                     <jet-checkbox name="remember" v-model:checked="form.remember" />
                     <span class="ml-2 text-sm text-gray-600">Remember me</span>
                 </label>
-            </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
+                <Link v-if="canResetPassword" :href="route('password.request')" class="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700">
                     Forgot your password?
                 </Link>
-
-                <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
-                </jet-button>
             </div>
+
+            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                Login
+            </jet-button>
         </form>
+
+        <div v-if="canRegister">
+            <hr class="my-6 border-gray-300 w-full">
+            <p class="mt-8">Need an account?
+                <Link :href="route('register')" class="text-blue-500 hover:text-blue-700 font-semibold">
+                    Create an account
+                </Link>
+            </p>
+        </div>
     </jet-authentication-card>
 </template>
 
@@ -47,7 +63,8 @@
     import { defineComponent } from 'vue'
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
-    import JetButton from '@/Jetstream/Button.vue'
+    import JetAuthenticationBackground from '@/Jetstream/BackgroundLogin.vue'
+    import JetButton from '@/Jetstream/LoginButton.vue'
     import JetInput from '@/Jetstream/Input.vue'
     import JetCheckbox from '@/Jetstream/Checkbox.vue'
     import JetLabel from '@/Jetstream/Label.vue'
@@ -59,6 +76,7 @@
             Head,
             JetAuthenticationCard,
             JetAuthenticationCardLogo,
+            JetAuthenticationBackground,
             JetButton,
             JetInput,
             JetCheckbox,
@@ -69,6 +87,7 @@
 
         props: {
             canResetPassword: Boolean,
+            canRegister: Boolean,
             status: String
         },
 

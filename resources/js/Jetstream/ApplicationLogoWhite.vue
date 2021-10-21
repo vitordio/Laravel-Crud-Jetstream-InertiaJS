@@ -9,7 +9,7 @@
         props: {
             logo_src: {
                 type: String,
-                default: '/images/logo.png',
+                default: '/images/logo_white.png',
             },
             logo_alt: {
                 type: String,
