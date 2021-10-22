@@ -24,4 +24,9 @@ return [
     'errorValidation' => 'Ocorreram erros de validação. Por favor realize o preenchimento correto dos campos e tente novamente.',
     'create_failed' => 'Não foi possível realizar a criação do usuário, tente novamente.',
     'update_failed' => 'Não foi possível realizar a atualização do usuário, tente novamente.',
+    'success' => 'Sucesso',
+    'added' => 'Adicionado com sucesso',
+
+    // Usuários
+    'user_created' => 'Usuário criado'
 ];

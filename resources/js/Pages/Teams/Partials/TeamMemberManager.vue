@@ -6,30 +6,30 @@
             <!-- Add Team Member -->
             <jet-form-section @submitted="addTeamMember">
                 <template #title>
-                    Add Team Member
+                    {{ $trans().get('labels.add_team_member')}}
                 </template>
 
                 <template #description>
-                    Add a new team member to your team, allowing them to collaborate with you.
+                    {{ $trans().get('labels.add_team_member_text')}}
                 </template>
 
                 <template #form>
                     <div class="col-span-6">
                         <div class="max-w-xl text-sm text-gray-600">
-                            Please provide the email address of the person you would like to add to this team.
+                            {{ $trans().get('labels.provide_email_member')}}
                         </div>
                     </div>
 
                     <!-- Member Email -->
                     <div class="col-span-6 sm:col-span-4">
-                        <jet-label for="email" value="Email" />
-                        <jet-input id="email" type="email" class="mt-1 block w-full" v-model="addTeamMemberForm.email" />
+                        <jet-label for="email">{{ $trans().get('labels.email')}}</jet-label>
+                        <jet-input id="email" type="email" :placeholder="$trans().get('labels.email')" class="mt-1 block w-full" v-model="addTeamMemberForm.email" />
                         <jet-input-error :message="addTeamMemberForm.errors.email" class="mt-2" />
                     </div>
 
                     <!-- Role -->
                     <div class="col-span-6 lg:col-span-4" v-if="availableRoles.length > 0">
-                        <jet-label for="roles" value="Role" />
+                        <jet-label for="roles">{{ $trans().get('labels.role') }}</jet-label>
                         <jet-input-error :message="addTeamMemberForm.errors.role" class="mt-2" />
 
                         <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
@@ -60,11 +60,11 @@
 
                 <template #actions>
                     <jet-action-message :on="addTeamMemberForm.recentlySuccessful" class="mr-3">
-                        Added.
+                        {{ $trans().get('messages.added') }}
                     </jet-action-message>
 
                     <jet-button :class="{ 'opacity-25': addTeamMemberForm.processing }" :disabled="addTeamMemberForm.processing">
-                        Add
+                        {{ $trans().get('buttons.add') }}
                     </jet-button>
                 </template>
             </jet-form-section>
@@ -76,11 +76,11 @@
             <!-- Team Member Invitations -->
             <jet-action-section class="mt-10 sm:mt-0">
                 <template #title>
-                    Pending Team Invitations
+                    {{ $trans().get('labels.pending_team_invitations') }}
                 </template>
 
                 <template #description>
-                    These people have been invited to your team and have been sent an invitation email. They may join the team by accepting the email invitation.
+                    {{ $trans().get('labels.pending_team_invitations_text') }}
                 </template>
 
                 <!-- Pending Team Member Invitation List -->
@@ -94,7 +94,7 @@
                                 <button class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
                                                     @click="cancelTeamInvitation(invitation)"
                                                     v-if="userPermissions.canRemoveTeamMembers">
-                                    Cancel
+                                    {{ $trans().get('buttons.cancel') }}
                                 </button>
                             </div>
                         </div>
@@ -109,11 +109,11 @@
             <!-- Manage Team Members -->
             <jet-action-section class="mt-10 sm:mt-0">
                 <template #title>
-                    Team Members
+                    {{ $trans().get('labels.team_members') }}
                 </template>
 
                 <template #description>
-                    All of the people that are part of this team.
+                    {{ $trans().get('labels.team_members_text') }}
                 </template>
 
                 <!-- Team Member List -->
@@ -141,14 +141,14 @@
                                 <button class="cursor-pointer ml-6 text-sm text-red-500"
                                                     @click="confirmLeavingTeam"
                                                     v-if="$page.props.user.id === user.id">
-                                    Leave
+                                    {{ $trans().get('buttons.leave_team') }}
                                 </button>
 
                                 <!-- Remove Team Member -->
                                 <button class="cursor-pointer ml-6 text-sm text-red-500"
                                                     @click="confirmTeamMemberRemoval(user)"
                                                     v-if="userPermissions.canRemoveTeamMembers">
-                                    Remove
+                                    {{ $trans().get('buttons.remove') }}
                                 </button>
                             </div>
                         </div>
@@ -160,7 +160,7 @@
         <!-- Role Management Modal -->
         <jet-dialog-modal :show="currentlyManagingRole" @close="currentlyManagingRole = false">
             <template #title>
-                Manage Role
+                {{ $trans().get('labels.manage_role') }}
             </template>
 
             <template #content>
@@ -193,11 +193,11 @@
 
             <template #footer>
                 <jet-secondary-button @click="currentlyManagingRole = false">
-                    Cancel
+                    {{ $trans().get('buttons.cancel') }}
                 </jet-secondary-button>
 
                 <jet-button class="ml-2" @click="updateRole" :class="{ 'opacity-25': updateRoleForm.processing }" :disabled="updateRoleForm.processing">
-                    Save
+                    {{ $trans().get('buttons.save') }}
                 </jet-button>
             </template>
         </jet-dialog-modal>
@@ -205,20 +205,20 @@
         <!-- Leave Team Confirmation Modal -->
         <jet-confirmation-modal :show="confirmingLeavingTeam" @close="confirmingLeavingTeam = false">
             <template #title>
-                Leave Team
+                {{ $trans().get('labels.leave_team') }}
             </template>
 
             <template #content>
-                Are you sure you would like to leave this team?
+                {{ $trans().get('labels.leave_team_confirmation') }}
             </template>
 
             <template #footer>
                 <jet-secondary-button @click="confirmingLeavingTeam = false">
-                    Cancel
+                    {{ $trans().get('buttons.cancel') }}
                 </jet-secondary-button>
 
                 <jet-danger-button class="ml-2" @click="leaveTeam" :class="{ 'opacity-25': leaveTeamForm.processing }" :disabled="leaveTeamForm.processing">
-                    Leave
+                    {{ $trans().get('buttons.leave_team') }}
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>
@@ -226,20 +226,20 @@
         <!-- Remove Team Member Confirmation Modal -->
         <jet-confirmation-modal :show="teamMemberBeingRemoved" @close="teamMemberBeingRemoved = null">
             <template #title>
-                Remove Team Member
+                {{ $trans().get('labels.remove_team_member') }}
             </template>
 
             <template #content>
-                Are you sure you would like to remove this person from the team?
+                {{ $trans().get('labels.remove_team_member_confirmation') }}
             </template>
 
             <template #footer>
                 <jet-secondary-button @click="teamMemberBeingRemoved = null">
-                    Cancel
+                    {{ $trans().get('buttons.cancel') }}
                 </jet-secondary-button>
 
                 <jet-danger-button class="ml-2" @click="removeTeamMember" :class="{ 'opacity-25': removeTeamMemberForm.processing }" :disabled="removeTeamMemberForm.processing">
-                    Remove
+                    {{ $trans().get('buttons.remove') }}
                 </jet-danger-button>
             </template>
         </jet-confirmation-modal>

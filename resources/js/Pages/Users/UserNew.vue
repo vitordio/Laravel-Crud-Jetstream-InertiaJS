@@ -1,11 +1,11 @@
 <template>
     <jet-form-section @submitted="store">
         <template #title>
-            Create User
+            {{ $trans().get('labels.new_user') }}
         </template>
 
         <template #description>
-            Create a new user.
+            {{ $trans().get('labels.create_user') }}
         </template>
 
         <!-- Validation Errors -->
@@ -13,23 +13,23 @@
 
         <template #form>
             <div class="col-span-6">
-                <jet-label for="name" value="Name" />
-                <jet-input id="name" placeholder="Name" type="text" class="mt-1 block w-full" v-model="form.name" autofocus />
+                <jet-label for="name">{{ $trans().get('labels.name')}}</jet-label>
+                <jet-input id="name" :placeholder="$trans().get('labels.name')" type="text" class="mt-1 block w-full" v-model="form.name" autofocus />
                 <jet-input-error :message="form.errors.name" class="mt-2" />
             </div>
             <div class="col-span-6">
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" placeholder="Email" type="text" class="mt-1 block w-full" v-model="form.email" autofocus />
+                <jet-label for="email">{{ $trans().get('labels.email')}}</jet-label>
+                <jet-input id="email" :placeholder="$trans().get('labels.email')" type="text" class="mt-1 block w-full" v-model="form.email" autofocus />
                 <jet-input-error :message="form.errors.email" class="mt-2" />
             </div>
             <div class="col-span-6">
-                <jet-label for="password" value="Password" />
-                <jet-input id="password" placeholder="Password" type="password" class="mt-1 block w-full" v-model="form.password" autofocus />
+                <jet-label for="password">{{ $trans().get('labels.password')}}</jet-label>
+                <jet-input id="password" :placeholder="$trans().get('labels.password')" type="password" class="mt-1 block w-full" v-model="form.password" autofocus />
                 <jet-input-error :message="form.errors.password" class="mt-2" />
             </div>
             <div class="col-span-6">
-                <jet-label for="password_confirmation" value="Confirmation" />
-                <jet-input id="password_confirmation" placeholder="Confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" autofocus />
+                <jet-label for="password_confirmation">{{ $trans().get('labels.password_confirmation')}}</jet-label>
+                <jet-input id="password_confirmation" :placeholder="$trans().get('labels.password_confirmation')" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" autofocus />
                 <jet-input-error :message="form.errors.password_confirmation" class="mt-2" />
             </div>
 
@@ -39,7 +39,7 @@
                         <jet-checkbox name="terms" id="terms" v-model:checked="form.terms" />
 
                         <div class="ml-2">
-                            I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Privacy Policy</a>
+                            Eu concordo com os <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Termos de Serviço</a> e <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Política de Privacidade</a>
                         </div>
                     </div>
 
@@ -50,10 +50,10 @@
 
         <template #actions>
             <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                User created.
+                {{ $trans().get('messages.user_created')}}
             </jet-action-message>
             <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                {{ $trans().get('buttons.save')}}
             </jet-button>
         </template>
     </jet-form-section>

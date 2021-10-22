@@ -1,5 +1,5 @@
 <template>
-    <Head title="Login" />
+    <Head :title="$trans().get('auth.login')" />
 
     <!-- Login component -->
     <jet-authentication-card>
@@ -12,7 +12,7 @@
         </template>
 
         <template #pageTitle>
-            <h1 class="text-xl md:text-2xl font-bold leading-tight mt-4">Log in to your account</h1>
+            <h1 class="text-xl md:text-2xl font-bold leading-tight mt-4">{{ $trans().get('auth.login_in_account') }}</h1>
         </template>
 
         <!-- Validation Errors -->
@@ -23,39 +23,40 @@
 
         <form @submit.prevent="submit" class="mt-6">
             <div>
-                <jet-label for="email" class="block text-gray-700" value="E-mail" />
-                <jet-input id="email" type="email" placeholder="Enter Email Address" class="mt-1 block w-full" v-model="form.email" required autocomplete  autofocus />
+                <jet-label for="email" class="block text-gray-700">{{ $trans().get('labels.email') }} </jet-label>
+                <jet-input id="email" type="email" :placeholder="$trans().get('labels.enter_email')" class="mt-1 block w-full" v-model="form.email" required autocomplete  autofocus />
             </div>
 
             <div class="mt-4">
-                <jet-label for="password" class="block text-gray-700" value="Password" />
-                <jet-input id="password" type="password" placeholder="Enter Password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
+                <jet-label for="password" class="block text-gray-700">{{ $trans().get('labels.password') }} </jet-label>
+                <jet-input id="password" type="password" :placeholder="$trans().get('labels.enter_password')" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
             </div>
 
             <div class="flex justify-between mt-4">
                 <label class="flex items-center">
                     <jet-checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                    <span class="ml-2 text-sm text-gray-600">{{ $trans().get('auth.remember') }}</span>
                 </label>
 
-                <Link v-if="canResetPassword" :href="route('password.request')" class="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700">
-                    Forgot your password?
+                <Link v-if="canResetPassword" :href="route('password.request')" class="text-sm font-semibold text-gray-700 hover:text-kpmg-blue focus:text-kpmg-blue">
+                    {{ $trans().get('auth.forgot_password') }}
                 </Link>
             </div>
 
             <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Login
+                {{ $trans().get('auth.login') }}
             </jet-button>
         </form>
 
         <div v-if="canRegister">
             <hr class="my-6 border-gray-300 w-full">
-            <p class="mt-8">Need an account?
-                <Link :href="route('register')" class="text-blue-500 hover:text-blue-700 font-semibold">
-                    Create an account
+            <p class="mt-8">{{ $trans().get('auth.need_account') }}
+                <Link :href="route('register')" class="text-kpmg-blue hover:text-kpmg-medium_blue font-semibold">
+                    {{ $trans().get('auth.register') }}
                 </Link>
             </p>
         </div>
+
     </jet-authentication-card>
 </template>
 

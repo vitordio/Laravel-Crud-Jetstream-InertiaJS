@@ -1,5 +1,5 @@
 <template>
-    <Head title="Forgot Password" />
+    <Head :title="$trans().get('auth.forgot_password')" />
 
     <jet-authentication-card>
         <template #background>
@@ -11,11 +11,11 @@
         </template>
 
         <template #pageTitle>
-            <h1 class="text-xl md:text-2xl font-bold leading-tight mt-4">Forgot Password</h1>
+            <h1 class="text-xl md:text-2xl font-bold leading-tight mt-4">{{ $trans().get('auth.forgot_password') }}</h1>
         </template>
 
         <div class="mb-4 mt-4 text-sm text-gray-600">
-            Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
+            {{ $trans().get('auth.text_forgot_password') }}
         </div>
 
         <jet-validation-errors class="mb-4 mt-4" />
@@ -25,19 +25,19 @@
 
         <form @submit.prevent="submit" class="mt-6">
             <div>
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" placeholder="Email" class="mt-1 block w-full" v-model="form.email" required autofocus />
+                <jet-label for="email">{{ $trans().get('labels.email') }}</jet-label>
+                <jet-input id="email" type="email" :placeholder="$trans().get('labels.email')" class="mt-1 block w-full" v-model="form.email" required autofocus />
             </div>
 
             <div class="flex items-center justify-end">
                 <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Email Password Reset Link
+                    {{ $trans().get('buttons.password_reset_link') }}
                 </jet-button>
             </div>
 
             <div class="flex items-center justify-center mt-4">
                 <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Voltar
+                    {{ $trans().get('buttons.back') }}
                 </Link>
             </div>
         </form>

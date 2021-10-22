@@ -4,21 +4,21 @@
             :href="route('dashboard')"
             :active="route().current('dashboard')"
         >
-            Dashboard
+            {{ $trans().get('labels.dashboard')}}
         </jet-nav-link>
 
         <jet-nav-link
             :href="route('users.index')"
             :active="route().current('users.index')"
         >
-            Users
+            {{ $trans().get('labels.users')}}
         </jet-nav-link>
 
         <jet-nav-link
             :href="route('contacts.index')"
             :active="route().current('contacts.index')"
         >
-            Contacts
+            Contatos
         </jet-nav-link>
     </nav>
 </template>

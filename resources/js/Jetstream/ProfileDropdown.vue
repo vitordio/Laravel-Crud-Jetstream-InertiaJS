@@ -19,15 +19,15 @@
 
             <template #content>
                 <div class="block px-4 py-2 text-xs text-gray-400">
-                    Manage Account
+                    {{ $trans().get('labels.manage_account')}}
                 </div>
 
                 <jet-dropdown-link :href="route('profile.show')">
-                    Profile
+                    {{ $trans().get('labels.profile')}}
                 </jet-dropdown-link>
 
                 <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
-                    API Tokens
+                    {{ $trans().get('labels.api_tokens')}}
                 </jet-dropdown-link>
 
                 <div class="border-t border-gray-100"></div>
@@ -35,7 +35,7 @@
                 <!-- Logout -->
                 <form @submit.prevent="logout">
                     <jet-dropdown-link as="button">
-                        Log Out
+                        {{ $trans().get('auth.logout')}}
                     </jet-dropdown-link>
                 </form>
             </template>

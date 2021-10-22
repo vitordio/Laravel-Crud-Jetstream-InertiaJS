@@ -1,8 +1,8 @@
 <template>
-    <app-layout title="Create Team">
+    <app-layout :title="$trans().get('labels.new_team')">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create Team
+                {{ $trans().get('labels.new_team')}}
             </h2>
         </template>
 

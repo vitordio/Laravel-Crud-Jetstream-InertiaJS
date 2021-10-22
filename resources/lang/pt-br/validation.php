@@ -119,5 +119,6 @@ return [
         'terms' => 'Termos',
         'password' => 'Senha',
         'password_confirmation' => 'Confirmação de senha',
+        'current_password' => 'Senha atual',
     ],
 ];

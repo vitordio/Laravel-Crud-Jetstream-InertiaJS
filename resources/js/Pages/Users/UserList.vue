@@ -4,11 +4,11 @@
 
         <jet-action-section class="mt-10 sm:mt-0">
             <template #title>
-                Users
+                {{ $trans().get('labels.users') }}
             </template>
 
             <template #description>
-                All Users.
+                {{ $trans().get('labels.all_users') }}
             </template>
 
             <template #content>

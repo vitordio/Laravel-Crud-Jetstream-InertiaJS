@@ -19,23 +19,23 @@
                     <!-- Team Management -->
                     <template v-if="$page.props.jetstream.hasTeamFeatures">
                         <div class="block px-4 py-2 text-xs text-gray-400">
-                            Manage Team
+                            {{ $trans().get('labels.manage_team')}}
                         </div>
 
                         <!-- Team Settings -->
                         <jet-dropdown-link :href="route('teams.show', $page.props.user.current_team)">
-                            Team Settings
+                            {{ $trans().get('labels.team_settings')}}
                         </jet-dropdown-link>
 
                         <jet-dropdown-link :href="route('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
-                            Create New Team
+                            {{ $trans().get('labels.create_new_team')}}
                         </jet-dropdown-link>
 
                         <div class="border-t border-gray-100"></div>
 
                         <!-- Team Switcher -->
                         <div class="block px-4 py-2 text-xs text-gray-400">
-                            Switch Teams
+                            {{ $trans().get('labels.switch_teams')}}
                         </div>
 
                         <template v-for="team in $page.props.user.all_teams" :key="team.id">

@@ -3,7 +3,7 @@
     <app-layout title="Dashboard">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Dashboard
+                {{ $trans().get('labels.dashboard')}}
             </h2>
         </template>
 

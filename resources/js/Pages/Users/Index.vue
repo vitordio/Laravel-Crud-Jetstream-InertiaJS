@@ -1,10 +1,10 @@
 <template>
-    <Head title="Users" />
+    <Head :title="$trans().get('labels.users')" />
 
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Users
+                {{ $trans().get('labels.users') }}
             </h2>
         </template>
 

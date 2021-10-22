@@ -6,14 +6,14 @@
 
         <jet-dialog-modal :show="confirmingPassword" @close="closeModal">
             <template #title>
-                {{ title }}
+                {{ $trans().get('labels.confirm_password') }}
             </template>
 
             <template #content>
-                {{ content }}
+                {{ $trans().get('labels.confirm_password_text') }}
 
                 <div class="mt-4">
-                    <jet-input type="password" class="mt-1 block w-3/4" placeholder="Password"
+                    <jet-input type="password" class="mt-1 block w-3/4" :placeholder="$trans().get('labels.password')"
                                 ref="password"
                                 v-model="form.password"
                                 @keyup.enter="confirmPassword" />
@@ -24,11 +24,11 @@
 
             <template #footer>
                 <jet-secondary-button @click="closeModal">
-                    Cancel
+                    {{ $trans().get('buttons.cancel') }}
                 </jet-secondary-button>
 
                 <jet-button class="ml-2" @click="confirmPassword" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    {{ button }}
+                    {{ $trans().get('buttons.confirm') }}
                 </jet-button>
             </template>
         </jet-dialog-modal>
@@ -50,12 +50,6 @@
             title: {
                 default: 'Confirm Password',
             },
-            content: {
-                default: 'For your security, please confirm your password to continue.',
-            },
-            button: {
-                default: 'Confirm',
-            }
         },
 
         components: {
