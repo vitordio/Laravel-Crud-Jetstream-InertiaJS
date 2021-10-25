@@ -8,21 +8,19 @@
             <!-- Page menu -->
             <Menu />
 
-            <main>
-                <div class="container">
-                    <div class="w-full h-full rounded">
-                        <!-- Page Heading -->
-                        <div class="lg:flex lg:items-center lg:justify-between bg-white shadow py-6 px-4 sm:px-6 lg:px-8">
-                            <div class="flex-1 min-w-0">
-                                <slot name="header"></slot>
-                            </div>
+            <div class="container">
+                <div class="w-full h-full rounded">
+                    <!-- Page Heading -->
+                    <div class="lg:flex lg:items-center lg:justify-between bg-white shadow py-6 px-4 sm:px-6 lg:px-8">
+                        <div class="flex-1 min-w-0">
+                            <slot name="header"></slot>
                         </div>
-
-                        <!-- Page Content -->
-                        <slot></slot>
                     </div>
+
+                    <!-- Page Content -->
+                    <slot></slot>
                 </div>
-            </main>
+            </div>
         </div>
     </div>
 </template>

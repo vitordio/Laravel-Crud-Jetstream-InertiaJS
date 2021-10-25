@@ -31,7 +31,7 @@
     <div
         class="
             sidebar
-            bg-blue-800
+            bg-kpmg-blue
             text-blue-100
             w-64
             space-y-6
