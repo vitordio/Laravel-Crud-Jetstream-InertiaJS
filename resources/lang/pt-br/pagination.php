@@ -13,8 +13,10 @@ return [
     |
     */
 
-   
+
     'previous' => '&laquo; Anterior',
     'next'     => 'Próxima &raquo;',
-
+    'results' => 'resultados',
+    'to' => 'a',
+    'of' => 'de'
 ];

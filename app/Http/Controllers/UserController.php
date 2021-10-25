@@ -10,6 +10,9 @@ use App\Models\User;
 use Exception;
 use Inertia\Inertia;
 use Laravel\Jetstream\Contracts\DeletesTeams;
+use ProtoneMedia\LaravelQueryBuilderInertiaJs\InertiaTable;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends Controller
 {
@@ -35,9 +38,36 @@ class UserController extends Controller
      */
     public function index()
     {
+        $globalSearch = AllowedFilter::callback('global', function ($query, $value) {
+            $query->where(function ($query) use ($value) {
+                $query->where('name', 'LIKE', "%{$value}%")->orWhere('email', 'LIKE', "%{$value}%");
+            });
+        });
+
+        $users = QueryBuilder::for(User::class)
+            ->defaultSort('id')
+            ->allowedSorts(['id','name', 'email', 'current_team_id'])
+            ->allowedFilters(['id', 'name', 'email', 'current_team_id', $globalSearch])
+            ->paginate()
+            ->withQueryString();
+
         return Inertia::render('Users/Index', [
-            'users' => $this->users::orderBy('id', 'desc')->paginate()
-        ]);
+            'users' => $users,
+        ])->table(function (InertiaTable $table) {
+            $table->addSearchRows([
+                'name' => 'Name',
+                'email' => 'Email address',
+            ])->addColumns([
+                'id' => 'ID',
+                'name' => 'Nome',
+                'email' => 'Email address',
+                'current_team_id' => 'Team',
+            ]);
+        });
+
+        // return Inertia::render('Users/Index', [
+        //     'users' => $this->users::orderBy('id', 'desc')->paginate()
+        // ]);
     }
 
     /**

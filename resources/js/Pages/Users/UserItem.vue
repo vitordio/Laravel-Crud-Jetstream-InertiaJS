@@ -1,17 +1,19 @@
 <template>
-    <div>
+    <td>
         <button
-            class="cursor-pointer ml-6 text-sm text-gray-400 underline focus:outline-none"
+            class="cursor-pointer text-sm text-gray-400 underline focus:outline-none"
             @click="updating = true">
-            {{ $trans().get('buttons.edit') }}
+            <svg-icon type="mdi" :path="iconPaths.edit" title="sss"></svg-icon>
         </button>
 
         <button
-            class="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
+            class="cursor-pointer ml-2 text-sm text-red-500 focus:outline-none"
             @click="destroying = true">
-            {{ $trans().get('buttons.delete') }}
+            <svg-icon type="mdi" :path="iconPaths.delete"></svg-icon>
         </button>
+    </td>
 
+    <div>
         <jet-dialog-modal :show="updating" @close="updating = false">
             <template #title>
                 {{ $trans().get('labels.update_user') }}
@@ -87,6 +89,9 @@
     import JetLabel from "@/Jetstream/Label";
     import JetSecondaryButton from "@/Jetstream/SecondaryButton";
 
+    import SvgIcon from '@jamescoyle/vue-icon'
+    import { mdiPencilCircleOutline, mdiDeleteEmptyOutline } from '@mdi/js'
+
     export default {
         components: {
             JetButton,
@@ -98,6 +103,7 @@
             JetInputError,
             JetLabel,
             JetSecondaryButton,
+            SvgIcon
         },
         props: [
             'user',
@@ -113,6 +119,10 @@
                 updating: false,
                 destroyForm: this.$inertia.form(),
                 destroying: false,
+                iconPaths: {
+                    edit: mdiPencilCircleOutline,
+                    delete: mdiDeleteEmptyOutline
+                }
             }
         },
         methods: {

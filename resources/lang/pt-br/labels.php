@@ -81,5 +81,9 @@ return [
     'email' => 'E-mail',
     'password' => 'Senha',
     'password_confirmation' => 'Confirmação da Senha',
-    'current_password' => 'Senha atual'
+    'current_password' => 'Senha atual',
+
+    // Grids
+    'no_results_found' => 'Nenhum resultado encontrado.',
+    'search' => 'Digite aqui o que deseja buscar...'
 ];

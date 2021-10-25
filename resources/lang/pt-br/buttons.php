@@ -21,4 +21,5 @@ return [
     'logout_all_other_browser' => 'Sair de outras sessões do navegador',
     'leave_team' => 'Sair da equipe',
     'delete_team' => 'Deletar equipe',
+    'create_user' => 'Criar usuário'
 ];

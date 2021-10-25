@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         Mariuzzo\LaravelJsLocalization\LaravelJsLocalizationServiceProvider::class,
+        Spatie\QueryBuilder\QueryBuilderServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -1,6 +1,6 @@
 <template>
     <div class="mt-6 -mb-1 flex flex-wrap">
-        <template v-for="(link, key) in links">
+        <!-- <template v-for="(link, key) in links">
             <div v-if="link.url === null"
                  :key="key"
                  class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md"
@@ -15,7 +15,7 @@
                 preserve-scroll>
                 <span v-html="link.label"></span>
             </Link>
-        </template>
+        </template> -->
     </div>
 </template>
 

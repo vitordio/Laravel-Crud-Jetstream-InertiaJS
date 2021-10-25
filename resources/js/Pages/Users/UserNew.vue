@@ -1,62 +1,72 @@
 <template>
-    <jet-form-section @submitted="store">
-        <template #title>
-            {{ $trans().get('labels.new_user') }}
-        </template>
+    <div class="max-w-7xl mx-auto mt-6 sm:px-6 lg:px-8" v-if="formIsVisible">
+        <jet-form-section @submitted="store">
+            <template #title>
+                {{ $trans().get('labels.new_user') }}
+            </template>
 
-        <template #description>
-            {{ $trans().get('labels.create_user') }}
-        </template>
+            <template #description>
+                {{ $trans().get('labels.create_user') }}
+            </template>
 
-        <!-- Validation Errors -->
-        <jet-validation-errors class="mb-4 mt-4" />
+            <!-- Validation Errors -->
+            <jet-validation-errors class="mb-4 mt-4" />
 
-        <template #form>
-            <div class="col-span-6">
-                <jet-label for="name">{{ $trans().get('labels.name')}}</jet-label>
-                <jet-input id="name" :placeholder="$trans().get('labels.name')" type="text" class="mt-1 block w-full" v-model="form.name" autofocus />
-                <jet-input-error :message="form.errors.name" class="mt-2" />
-            </div>
-            <div class="col-span-6">
-                <jet-label for="email">{{ $trans().get('labels.email')}}</jet-label>
-                <jet-input id="email" :placeholder="$trans().get('labels.email')" type="text" class="mt-1 block w-full" v-model="form.email" autofocus />
-                <jet-input-error :message="form.errors.email" class="mt-2" />
-            </div>
-            <div class="col-span-6">
-                <jet-label for="password">{{ $trans().get('labels.password')}}</jet-label>
-                <jet-input id="password" :placeholder="$trans().get('labels.password')" type="password" class="mt-1 block w-full" v-model="form.password" autofocus />
-                <jet-input-error :message="form.errors.password" class="mt-2" />
-            </div>
-            <div class="col-span-6">
-                <jet-label for="password_confirmation">{{ $trans().get('labels.password_confirmation')}}</jet-label>
-                <jet-input id="password_confirmation" :placeholder="$trans().get('labels.password_confirmation')" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" autofocus />
-                <jet-input-error :message="form.errors.password_confirmation" class="mt-2" />
-            </div>
+            <template #form>
+                <div class="col-span-6">
+                    <jet-label for="name">{{ $trans().get('labels.name')}}</jet-label>
+                    <jet-input id="name" :placeholder="$trans().get('labels.name')" type="text" class="mt-1 block w-full" v-model="form.name" autofocus />
+                    <jet-input-error :message="form.errors.name" class="mt-2" />
+                </div>
+                <div class="col-span-6">
+                    <jet-label for="email">{{ $trans().get('labels.email')}}</jet-label>
+                    <jet-input id="email" :placeholder="$trans().get('labels.email')" type="text" class="mt-1 block w-full" v-model="form.email" autofocus />
+                    <jet-input-error :message="form.errors.email" class="mt-2" />
+                </div>
+                <div class="col-span-6">
+                    <jet-label for="password">{{ $trans().get('labels.password')}}</jet-label>
+                    <jet-input id="password" :placeholder="$trans().get('labels.password')" type="password" class="mt-1 block w-full" v-model="form.password" autofocus />
+                    <jet-input-error :message="form.errors.password" class="mt-2" />
+                </div>
+                <div class="col-span-6">
+                    <jet-label for="password_confirmation">{{ $trans().get('labels.password_confirmation')}}</jet-label>
+                    <jet-input id="password_confirmation" :placeholder="$trans().get('labels.password_confirmation')" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" autofocus />
+                    <jet-input-error :message="form.errors.password_confirmation" class="mt-2" />
+                </div>
 
-            <div class="col-span-6" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
-                <jet-label for="terms">
-                    <div class="flex items-center">
-                        <jet-checkbox name="terms" id="terms" v-model:checked="form.terms" />
+                <div class="col-span-6" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
+                    <jet-label for="terms">
+                        <div class="flex items-center">
+                            <jet-checkbox name="terms" id="terms" v-model:checked="form.terms" />
 
-                        <div class="ml-2">
-                            Eu concordo com os <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Termos de Serviço</a> e <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Política de Privacidade</a>
+                            <div class="ml-2">
+                                Eu concordo com os <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Termos de Serviço</a> e <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Política de Privacidade</a>
+                            </div>
                         </div>
-                    </div>
 
-                    <jet-input-error :message="form.errors.terms" class="mt-2" />
-                </jet-label>
-            </div>
-        </template>
+                        <jet-input-error :message="form.errors.terms" class="mt-2" />
+                    </jet-label>
+                </div>
+            </template>
 
-        <template #actions>
-            <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                {{ $trans().get('messages.user_created')}}
-            </jet-action-message>
-            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                {{ $trans().get('buttons.save')}}
+            <template #actions>
+                <jet-action-message :on="form.recentlySuccessful" class="mr-3">
+                    {{ $trans().get('messages.user_created')}}
+                </jet-action-message>
+                <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    {{ $trans().get('buttons.save')}}
+                </jet-button>
+            </template>
+        </jet-form-section>
+    </div>
+
+    <div class="mt-6 m:px-6 lg:px-8">
+        <div class="text-right mb-6">
+            <jet-button class="ml-2 bg-kpmg-blue hover:bg-kpmg-medium_blue" @click="showCreateForm">
+                {{ $trans().get('buttons.create_user') }}
             </jet-button>
-        </template>
-    </jet-form-section>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -88,18 +98,23 @@
                     password: '',
                     password_confirmation: '',
                     terms: false,
-                })
+                }),
+                formIsVisible: false,
             }
         },
         methods: {
+            showCreateForm() {
+                this.formIsVisible = !this.formIsVisible;
+            },
             store() {
                 this.form.post(route('users.store'), {
                     preserveScroll: true,
                     onSuccess: () => {
+                        this.formIsVisible = false
                         this.form.reset()
                     }
                 });
-            },
+            }
         },
     }
 </script>
